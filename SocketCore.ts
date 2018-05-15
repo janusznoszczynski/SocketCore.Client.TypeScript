@@ -232,7 +232,7 @@ export class WorkflowClient {
     handlersWorkflowsEvents: EventHandler[];
     options: any;
 
-    constructor(urlOrPath: string, options) {
+    constructor(urlOrPath: string, options: any) {
         options = options || {};
 
         options.contextHeader = options.contextHeader || (() => window.location.hash.replace("#", ""));
@@ -290,7 +290,7 @@ export class WorkflowClient {
         this.connection.open();
     }
 
-    send(channel, message) {
+    send(channel: string, message: Message) {
         const options = this.options;
 
         if (!message.messageId) {
@@ -306,7 +306,7 @@ export class WorkflowClient {
         }
 
         if (options.contextHeaderEnabled) {
-            message.headers.push({ Name: "Context", Value: options.contextHeader() });
+            message.headers.push(new MessageHeader("Context", options.contextHeader()));
         }
 
         this.connection.send({
