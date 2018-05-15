@@ -1,0 +1,47 @@
+{
+  "name": "socketcore.client.typescript",
+  "version": "1.0.1",
+  "description": "TypeScript client for SocketCore to add real-time functionality in your web apps",
+  "main": "SocketCore.js",
+  "types": "SocketCore.d.ts",
+  "scripts": {
+    "lint": "tslint -c tslint.json 'SocketCore.ts'",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janusznoszczynski/SocketCore.Client.TypeScript.git"
+  },
+  "keywords": [
+    "socketcore",
+    "realtime",
+    "typescript",
+    "client",
+    "websockets"
+  ],
+  "author": "Janusz Noszczyński <janusz.noszczynski@gmail.com> (https://twitter.com/jnoszczynski)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/janusznoszczynski/SocketCore.Client.TypeScript/issues"
+  },
+  "homepage": "https://github.com/janusznoszczynski/SocketCore.Client.TypeScript#readme",
+  "devDependencies": {
+    "jest": "^22.4.3",
+    "ts-jest": "^22.4.6",
+    "typescript": "^2.8.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": ".*\\.test.(ts|tsx|js)$"
+  },
+  "dependencies": {
+    "@types/jest": "^22.2.3"
+  }
+}
