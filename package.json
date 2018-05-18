@@ -1,6 +1,6 @@
 {
   "name": "socketcore-client-typescript",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "TypeScript client for SocketCore to add real-time functionality in your web apps",
   "main": "SocketCore.js",
   "types": "SocketCore.d.ts",
