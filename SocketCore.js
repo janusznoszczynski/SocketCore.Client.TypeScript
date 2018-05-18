@@ -9,7 +9,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 function createCookie(name, value, days) {
     var expires = "";
     if (days) {
@@ -261,7 +261,7 @@ var WorkflowClient = /** @class */ (function () {
             message.headers = [];
         }
         if (options.contextHeaderEnabled) {
-            message.headers.push({ Name: "Context", Value: options.contextHeader() });
+            message.headers.push(new MessageHeader("Context", options.contextHeader()));
         }
         this.connection.send({
             Channel: channel,
@@ -279,9 +279,17 @@ var WorkflowClient = /** @class */ (function () {
         });
     };
     WorkflowClient.prototype.dispatchMessage = function (data, thisObj) {
-        this.handlers.forEach(function (item) {
-            var msg = new Message(data.Namespace, data.Type, data.Data, data.Headers); // copy of the message
-            item.call(thisObj, msg);
+        this.handlers.forEach(function (handler) {
+            if (data instanceof Array) {
+                data.forEach(function (item) {
+                    var msg = new Message(item.Namespace, item.Type, item.Data, item.Headers); // copy of the message
+                    handler.call(thisObj, msg);
+                });
+            }
+            else {
+                var msg = new Message(data.Namespace, data.Type, data.Data, data.Headers); // copy of the message
+                handler.call(thisObj, msg);
+            }
         });
     };
     WorkflowClient.prototype.subscribeWorkflowsEventsChannel = function (fn) {

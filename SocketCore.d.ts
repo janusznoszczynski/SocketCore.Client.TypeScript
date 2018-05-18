@@ -48,7 +48,7 @@ export declare class WorkflowClient {
     constructor(urlOrPath: string, options: any);
     generateSessionId(): string;
     run(handler: EventHandler): void;
-    send(channel: any, message: any): void;
+    send(channel: string, message: Message): void;
     subscribe(fn: EventHandler): void;
     unsubscribe(fn: EventHandler): void;
     dispatchMessage(data: any, thisObj: any): void;
