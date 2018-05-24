@@ -39,7 +39,7 @@ function prepareUrl(urlOrPath: string) {
     }
 
     if (location.protocol === 'https:') {
-        "wss://" + location.host + urlOrPath
+        return "wss://" + location.host + urlOrPath;
     }
 
     return "ws://" + location.host + urlOrPath;
