@@ -41,11 +41,13 @@ function guid() {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 function prepareUrl(urlOrPath) {
-    if (urlOrPath.indexOf("ws://") !== -1) {
+    if (urlOrPath.indexOf("ws://") !== -1 || urlOrPath.indexOf("wss://") !== -1) {
         return urlOrPath;
     }
-    var url = "ws://" + location.host + urlOrPath;
-    return url;
+    if (location.protocol === 'https:') {
+        "wss://" + location.host + urlOrPath;
+    }
+    return "ws://" + location.host + urlOrPath;
 }
 var SocketEvent = /** @class */ (function () {
     function SocketEvent() {

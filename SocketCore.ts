@@ -34,12 +34,15 @@ function guid() {
 }
 
 function prepareUrl(urlOrPath: string) {
-    if (urlOrPath.indexOf("ws://") !== -1) {
+    if (urlOrPath.indexOf("ws://") !== -1 || urlOrPath.indexOf("wss://") !== -1) {
         return urlOrPath;
     }
 
-    const url = "ws://" + location.host + urlOrPath;
-    return url;
+    if (location.protocol === 'https:') {
+        "wss://" + location.host + urlOrPath
+    }
+
+    return "ws://" + location.host + urlOrPath;
 }
 
 
