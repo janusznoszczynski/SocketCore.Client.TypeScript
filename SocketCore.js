@@ -284,12 +284,12 @@ var WorkflowClient = /** @class */ (function () {
         this.handlers.forEach(function (handler) {
             if (data instanceof Array) {
                 data.forEach(function (item) {
-                    var msg = new Message(item.Namespace, item.Type, item.Data, item.Headers); // copy of the message
+                    var msg = item.clone(); // copy of the message
                     handler.call(thisObj, msg);
                 });
             }
             else {
-                var msg = new Message(data.Namespace, data.Type, data.Data, data.Headers); // copy of the message
+                var msg = data.clone(); // copy of the message
                 handler.call(thisObj, msg);
             }
         });
