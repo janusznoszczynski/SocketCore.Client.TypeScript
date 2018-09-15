@@ -9,7 +9,7 @@ export declare enum ConnectionState {
     Opening = 0,
     Opened = 1,
     Reopening = 2,
-    Closed = 3,
+    Closed = 3
 }
 export declare class Connection {
     url: string;
@@ -68,7 +68,6 @@ export declare class Message {
     replyToMessageId: string;
     constructor(ns: string, type: string, data?: any, headers?: MessageHeader[]);
     isMatch(ns: string, type: string): boolean;
-    clone(): any;
 }
 export declare class MessageHeader {
     name: string;

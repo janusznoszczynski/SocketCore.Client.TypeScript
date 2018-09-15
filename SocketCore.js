@@ -1,8 +1,11 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -10,6 +13,9 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+function clone(obj) {
+    return JSON.parse(JSON.stringify(obj));
+}
 function createCookie(name, value, days) {
     var expires = "";
     if (days) {
@@ -284,12 +290,12 @@ var WorkflowClient = /** @class */ (function () {
         this.handlers.forEach(function (handler) {
             if (data instanceof Array) {
                 data.forEach(function (item) {
-                    var msg = item.clone(); // copy of the message
+                    var msg = clone(item); // copy of the message
                     handler.call(thisObj, msg);
                 });
             }
             else {
-                var msg = data.clone(); // copy of the message
+                var msg = clone(data); // copy of the message
                 handler.call(thisObj, msg);
             }
         });
@@ -306,7 +312,7 @@ var WorkflowClient = /** @class */ (function () {
     };
     WorkflowClient.prototype.dispatchWorkflowsEventsMessage = function (msg, thisObj) {
         this.handlersWorkflowsEvents.forEach(function (item) {
-            var message = msg.clone(); // copy of the message
+            var message = clone(msg); // copy of the message
             item.call(thisObj, message);
         });
     };
@@ -335,12 +341,6 @@ var Message = /** @class */ (function () {
     }
     Message.prototype.isMatch = function (ns, type) {
         return this.namespace === ns && this.type === type;
-    };
-    // isMatch(msg: Message) {
-    //     return this.namespace === msg.namespace && this.type === msg.type;
-    // }
-    Message.prototype.clone = function () {
-        return JSON.parse(JSON.stringify(this));
     };
     return Message;
 }());

@@ -1,3 +1,7 @@
+function clone(obj) {
+    return JSON.parse(JSON.stringify(obj));
+}
+
 function createCookie(name: string, value: string, days: number) {
     let expires = "";
 
@@ -336,12 +340,12 @@ export class WorkflowClient {
         this.handlers.forEach((handler) => {
             if (data instanceof Array) {
                 data.forEach(function (item) {
-                    var msg = item.clone(); // copy of the message
+                    var msg = clone(item); // copy of the message
                     handler.call(thisObj, msg);
                 });
             }
             else {
-                var msg = data.clone(); // copy of the message
+                var msg = clone(data); // copy of the message
                 handler.call(thisObj, msg);
             }
         });
@@ -361,7 +365,7 @@ export class WorkflowClient {
 
     dispatchWorkflowsEventsMessage(msg, thisObj) {
         this.handlersWorkflowsEvents.forEach((item) => {
-            const message = msg.clone(); // copy of the message
+            const message = clone(msg); // copy of the message
             item.call(thisObj, message);
         });
     }
@@ -399,10 +403,6 @@ export class Message {
     // isMatch(msg: Message) {
     //     return this.namespace === msg.namespace && this.type === msg.type;
     // }
-
-    clone() {
-        return JSON.parse(JSON.stringify(this));
-    }
 }
 
 export class MessageHeader {
